@@ -4,6 +4,8 @@ import Driver.DriverB;
 import Transport.enums.BodyTypes;
 import Transport.exception.TransportTypeException;
 
+import java.util.Objects;
+
 public class Car extends Transport <DriverB> {
 
     private BodyTypes bodyTypes;
@@ -64,5 +66,19 @@ public class Car extends Transport <DriverB> {
     @Override
     public void maxSpeed() {
         System.out.println("Максимальная скорость у автомбиля " + getBrand() + getModel());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Car car = (Car) o;
+        return bodyTypes == car.bodyTypes;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), bodyTypes);
     }
 }

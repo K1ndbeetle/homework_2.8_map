@@ -4,6 +4,8 @@ import Driver.DriverD;
 import Transport.enums.CapacityType;
 import Transport.exception.TransportTypeException;
 
+import java.util.Objects;
+
 public class Bus extends Transport <DriverD> {
 
     private CapacityType capacityType;
@@ -62,6 +64,19 @@ public class Bus extends Transport <DriverD> {
     @Override
     public void maxSpeed() {
         System.out.println("Максимальная скорость у автобуса " + getBrand() + getModel());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bus bus = (Bus) o;
+        return capacityType == bus.capacityType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(capacityType);
     }
 }
 

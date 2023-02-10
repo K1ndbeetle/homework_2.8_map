@@ -4,6 +4,8 @@ import Driver.DriverC;
 import Transport.enums.LoadType;
 import Transport.exception.TransportTypeException;
 
+import java.util.Objects;
+
 public class Trucks extends Transport <DriverC> {
 
     private LoadType loadTypes;
@@ -64,5 +66,19 @@ public class Trucks extends Transport <DriverC> {
     @Override
     public void maxSpeed() {
         System.out.println("Максимальная скорость у грузовика " + getBrand() + getModel());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Trucks trucks = (Trucks) o;
+        return loadTypes == trucks.loadTypes;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), loadTypes);
     }
 }

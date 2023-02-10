@@ -8,7 +8,9 @@ import Transport.enums.LoadType;
 import Transport.exception.TransportTypeException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws TransportTypeException {
@@ -172,6 +174,22 @@ public class Main {
 
         System.out.println(mechanics);
 
+        List<Mechanic> mechanicsOfTransport1 = new ArrayList<>();
+        mechanicsOfTransport1.add(mechanic1);
+        List<Mechanic> mechanicsOfTransport2 = new ArrayList<>();
+        mechanicsOfTransport2.add(mechanic1);
+        mechanicsOfTransport2.add(mechanic3);
+        List<Mechanic> mechanicsOfTransport3 = new ArrayList<>();
+        mechanicsOfTransport3.add(mechanic3);
+        mechanicsOfTransport3.add(mechanic2);
+        List<Mechanic> mechanicsOfTransport4 = new ArrayList<>();
+        mechanicsOfTransport4.add(mechanic1);
+        List<Mechanic> mechanicsOfTransport5 = new ArrayList<>();
+        mechanicsOfTransport5.add(mechanic1);
+        mechanicsOfTransport5.add(mechanic3);
+        List<Mechanic> mechanicsOfTransport6 = new ArrayList<>();
+        mechanicsOfTransport6.add(mechanic3);
+
         carAudi.addMechanic(mechanic1);
         carBmw.addMechanic(mechanic2);
         carBmw.addMechanic(mechanic3);
@@ -222,6 +240,8 @@ public class Main {
 
         System.out.println(transport);
 
+        System.out.println();
+
         ServiceStation serviceCar = new ServiceStation();
         ServiceStation serviceTruck = new ServiceStation();
 
@@ -236,6 +256,21 @@ public class Main {
 
         System.out.println();
 
+        Map<Transport, List<Mechanic>> transportAndMechanics = new HashMap<>();
+        transportAndMechanics.put(carAudi, mechanicsOfTransport1);
+        transportAndMechanics.put(carBmw, mechanicsOfTransport2);
+        transportAndMechanics.put(trucksMan, mechanicsOfTransport3);
+        transportAndMechanics.put(trucksScania, mechanicsOfTransport4);
+        transportAndMechanics.put(busDaewoo, mechanicsOfTransport5);
+        transportAndMechanics.put(busHiger, mechanicsOfTransport6);
+
+        for (Map.Entry<Transport, List<Mechanic>> vehicle :
+                transportAndMechanics.entrySet()) {
+            System.out.println("Автомобиль " + vehicle.getKey().getBrand() + " " + vehicle.getKey().getModel() + ", механик(и): "
+                    + vehicle.getValue().toString().replace("[", "").replace("]", "") + ".");
+        }
+        System.out.println();
+
     }
 
     public static void driverAndMechanics(Transport transport) {
@@ -243,7 +278,9 @@ public class Main {
                 transport.getBrand() +
                 " " + transport.getModel() +
                 " является " + transport.getDriver().getFIO() +
-                ", транспорт обслуживается механиком(механиками): " + transport.getMechanics());
+                ", транспорт обслуживается механиком(механиками): "
+                + transport.getMechanics().toString().replace("[", "").replace("]", "")
+                + ".");
     }
 
     public static void printInfo(Transport<?> transport){
